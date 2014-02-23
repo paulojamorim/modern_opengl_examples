@@ -34,7 +34,7 @@ INCLUDE_DIRECTORIES(${GLM_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 
 # Adicionando as bibliotecas para linkar
-set (LIBRARIES ${GLEW_LIBRARY} ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${SOIL_LIBRARIES} ${SFML_LIBRARIES})
+set (LIBRARIES ${GLEW_LIBRARY} ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${SOIL_LIBRARIES} ${SFML_LIBRARIES} ${GLM_LIBRARIES})
 
 # Adicionando Sources
 add_executable (window window.cpp)
@@ -49,3 +49,7 @@ target_link_libraries(load_shader ${LIBRARIES})
 add_executable (first_triangle_shader first_triangle_shader.cpp)
 set (LIBRARIES ${LIBRARIES} load_shader)
 target_link_libraries(first_triangle_shader ${LIBRARIES})
+
+add_executable (matrices matrices.cpp)
+set (LIBRARIES ${LIBRARIES} load_shader)
+target_link_libraries(matrices ${LIBRARIES})
