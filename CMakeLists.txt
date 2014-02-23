@@ -9,9 +9,6 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") 
 endif()
 
-# Adicionando Sources
-set (SOURCES window.cpp)
-
 # GLEW
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_PATH})
@@ -36,5 +33,19 @@ INCLUDE_DIRECTORIES(${GLM_INCLUDE_DIRS})
 #find_package(SFML COMPONENTS graphics window system)
 #INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 
-add_executable (window ${SOURCES})
-target_link_libraries(window ${GLEW_LIBRARY} ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${SOIL_LIBRARIES} ${SFML_LIBRARIES})
+# Adicionando as bibliotecas para linkar
+set (LIBRARIES ${GLEW_LIBRARY} ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${SOIL_LIBRARIES} ${SFML_LIBRARIES})
+
+# Adicionando Sources
+add_executable (window window.cpp)
+target_link_libraries(window ${LIBRARIES})
+
+add_executable (first_triangle first_triangle.cpp)
+target_link_libraries(first_triangle ${LIBRARIES})
+
+add_library(load_shader SHARED load_shader.cpp load_shader.h)
+target_link_libraries(load_shader ${LIBRARIES})
+
+add_executable (first_triangle_shader first_triangle_shader.cpp)
+set (LIBRARIES ${LIBRARIES} load_shader)
+target_link_libraries(first_triangle_shader ${LIBRARIES})
