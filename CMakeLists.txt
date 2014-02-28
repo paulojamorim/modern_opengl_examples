@@ -51,5 +51,7 @@ set (LIBRARIES ${LIBRARIES} load_shader)
 target_link_libraries(first_triangle_shader ${LIBRARIES})
 
 add_executable (matrices matrices.cpp)
-set (LIBRARIES ${LIBRARIES} load_shader)
 target_link_libraries(matrices ${LIBRARIES})
+
+add_executable (cube cube.cpp)
+target_link_libraries(cube ${LIBRARIES})
